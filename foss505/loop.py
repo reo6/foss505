@@ -7,8 +7,7 @@ from enum import Enum
 from typing import Any
 
 get_empty_block = lambda bufsize: np.zeros(bufsize, dtype=np.float32)
-Block = Any # TODO: np.array[np.float32]
-BlockPair = tuple[Block, Block]
+BlockPair = tuple[Any, Any] # TODO: np.array[np.float32]
 Take = list[BlockPair]
 LoopMode = Enum("LoopMode", ["PLAY", "RECORD", "OVERDUB"])
 
@@ -62,3 +61,6 @@ class Loop:
             self.index += 1
         elif self.mode == LoopMode.PLAY:
             raise Exception("Cannot write blocks while in play mode.")
+
+    def get_name(self):
+        return f"Loop Channel #{self.id}"
