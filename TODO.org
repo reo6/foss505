@@ -7,7 +7,9 @@
 - [ ] Record beginning and ending quantization
 
 * TODO Fundamentals [0/2]
-- [ ] Basic implementation of multiple loopers
+- [-] Basic implementation of multiple loopers [1/2]
+  - [X] Implement Loop
+  - [ ] Implement Looper
 - [ ] Recording and saving to a file
 
 * TODO UI [0/3]
