@@ -7,7 +7,8 @@ from enum import Enum
 from typing import Any
 
 get_empty_block = lambda bufsize: np.zeros(bufsize, dtype=np.float32)
-BlockPair = tuple[Any, Any] # TODO: np.array[np.float32]
+Block = Any # TODO: np.array[np.float32]
+BlockPair = tuple[Block, Block]
 Take = list[BlockPair]
 LoopMode = Enum("LoopMode", ["PLAY", "RECORD", "OVERDUB"])
 
