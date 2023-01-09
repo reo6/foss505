@@ -1,0 +1,17 @@
+#+title: Todo
+
+* TODO Quantization [0/3]
+- [ ] Basic implementation of tempo
+- [ ] Playing metronome noise
+  - [ ] Toggle metronome
+- [ ] Record beginning and ending quantization
+
+* TODO Fundamentals [0/2]
+- [ ] Basic implementation of multiple loopers
+- [ ] Recording and saving to a file
+
+* TODO UI [0/3]
+- [ ] Creating a UI
+- [ ] Adding loop buttons
+  - [ ] Dynamic colors for different modes
+- [ ] Loop progress bars
