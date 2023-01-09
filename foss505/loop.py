@@ -43,14 +43,14 @@ class Loop:
 
     def next_blocks(self) -> BlockPair:
         if len(self.take) == 0:
-            return get_empty_block(self.bufsize)
+            return (get_empty_block(self.bufsize), get_empty_block(self.bufsize))
 
         pair = self.take[self.index]
         self.index += 1
 
         return pair
 
-    def write_blocks(self, pair: BlockPair):
+    def write_blocks(self, pair: BlockPair) -> BlockPair:
         """
         Writes the given pair to the current index of the take.
         Extends the take if in the recording mode, doesn't extend if
