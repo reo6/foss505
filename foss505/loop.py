@@ -58,9 +58,12 @@ class Loop:
         """
         if self.mode == LoopMode.RECORD:
             self.take.append(pair)
+            return pair
         elif self.mode == LoopMode.OVERDUB:
-            self.take[self.index] = pair
+            new_pair = self.take[self.index] + pair
+            self.take[self.index] = new_pair
             self.index += 1
+            return new_pair
         elif self.mode == LoopMode.PLAY:
             raise Exception("Cannot write blocks while in play mode.")
 
