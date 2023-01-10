@@ -12,7 +12,7 @@ class Station:
                  bufsize: int,
                  loop_channel_size: int=LOOP_CHANNEL_SIZE):
         self.bufsize = bufsize
-        self.loop_channels = [Loop(n) for n in range(1, loop_channel_size+1)]
+        self.loop_channels = [Loop(n, bufsize) for n in range(1, loop_channel_size+1)]
 
     def process(self, buffers_l: list[Block], buffers_r: list[Block]) -> tuple[Block, Block]:
         _empty_block = np.zeros(self.bufsize, dtype=np.float32)
