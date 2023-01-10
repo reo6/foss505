@@ -6,11 +6,11 @@
   - [ ] Toggle metronome
 - [ ] Record beginning and ending quantization
 
-* TODO Fundamentals [0/2]
-- [-] Basic implementation of multiple loopers [2/3]
+* TODO Fundamentals [1/2]
+- [X] Basic implementation of multiple loopers [3/3]
   - [X] Implement Loop
   - [X] Implement Station
-  - [ ] Implement Jack wrappers.
+  - [X] Implement Jack wrappers.
 - [ ] Recording and saving to a file
 
 * TODO UI [0/3]
