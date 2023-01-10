@@ -1,4 +1,4 @@
-from loop import Loop, LoopMode, Block
+from foss505.loop import Loop, LoopMode, Block
 import numpy as np
 import copy
 
