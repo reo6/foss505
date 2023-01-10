@@ -9,7 +9,7 @@ CLIENT_NAME = "Foss505"
 
 
 class JackClient:
-    def __init__(self, client_name: str):
+    def __init__(self, client_name: str=CLIENT_NAME):
         self.client = jack.Client(client_name)
         self.station = Station(self.client.blocksize)
 
