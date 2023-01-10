@@ -71,3 +71,8 @@ class Loop:
 
     def get_name(self):
         return f"Loop Channel #{self.id}"
+
+    def reset_loop(self):
+        self.mode = LoopMode.PLAY
+        self.take = []
+        self.index = 0
