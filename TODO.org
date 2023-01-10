@@ -1,4 +1,4 @@
-#+title: Todo
+This is an org file and is not guaranteed to look as expected on the Github page. Use Emacs.
 
 * TODO Quantization [0/3]
 - [ ] Basic implementation of tempo
