@@ -14,6 +14,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [ ] Recording and saving to a file
 - [ ] Advanced logging hooks
 - [ ] Enabling/Disabling a loop.
+- [ ] Use one input source for the entire looper instead of using different ones for each other.
 
 * TODO UI [2/7]
 - [X] Creating a UI
