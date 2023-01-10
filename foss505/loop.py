@@ -23,6 +23,7 @@ class Loop:
         self.mode = initial_mode
         self.__index = 0
         self.bufsize = bufsize
+        self.id = id
 
     @property
     def index(self):
