@@ -24,6 +24,8 @@ class Loop:
         self.__index = 0
         self.bufsize = bufsize
         self.id = id
+        self.reset_loop()
+        self.reset_loop()
 
     @property
     def index(self):
