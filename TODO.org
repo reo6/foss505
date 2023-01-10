@@ -6,18 +6,25 @@
   - [ ] Toggle metronome
 - [ ] Record beginning and ending quantization
 
-* TODO Fundamentals [1/2]
+* TODO Fundamentals [1/4]
 - [X] Basic implementation of multiple loopers [3/3]
   - [X] Implement Loop
   - [X] Implement Station
   - [X] Implement Jack wrappers.
 - [ ] Recording and saving to a file
+- [ ] Advanced logging hooks
+- [ ] Enabling/Disabling a loop.
 
-* TODO UI [0/3]
-- [ ] Creating a UI
-- [ ] Adding loop buttons
-  - [ ] Dynamic colors for different modes
+* TODO UI [2/7]
+- [X] Creating a UI
+- [X] Adding loop buttons
+  - [X] Dynamic colors for different modes
 - [ ] Loop progress bars
+- [ ] Volume Sliders
+- [ ] Reset loop button
+- [ ] UI Part of enabling/disabling a loop.
+- [ ] Refactor dirty LoopButton structure
 
-* TODO Bugs [0/1]
+* TODO Bugs [0/2]
 - [ ] Record is over-amplified when client started without resetting the Loop.
+- [ ] The block size of the input blocks are 256 for no reason. Changing block size solves the problem temporarily.
