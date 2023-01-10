@@ -61,7 +61,8 @@ class Loop:
             self.take.append(pair)
             return pair
         elif self.mode == LoopMode.OVERDUB:
-            new_pair = self.take[self.index] + pair
+            take_pair = self.take[self.index]
+            new_pair = (take_pair[0] + pair[0], take_pair[1] + pair[1])
             self.take[self.index] = new_pair
             self.index += 1
             return new_pair
