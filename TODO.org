@@ -16,12 +16,12 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [ ] Enabling/Disabling a loop.
 - [ ] Use one input source for the entire looper instead of using different ones for each other.
 
-* TODO UI [2/7]
+* TODO UI [3/7]
 - [X] Creating a UI
 - [X] Adding loop buttons
   - [X] Dynamic colors for different modes
 - [ ] Loop progress bars
-- [ ] Volume Sliders
+- [X] Volume Sliders
 - [ ] Reset loop button
 - [ ] UI Part of enabling/disabling a loop.
 - [ ] Refactor dirty LoopButton structure
