@@ -29,3 +29,5 @@ This is an org file and is not guaranteed to look as expected on the Github page
 * TODO Bugs [0/2]
 - [ ] Record is over-amplified when client started without resetting the Loop.
 - [ ] The block size of the input blocks are 256 for no reason. Changing block size solves the problem temporarily.
+
+* IDEA Create process function on Loop instances instead of the station. (?)
