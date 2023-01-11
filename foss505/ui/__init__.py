@@ -31,9 +31,10 @@ class LooperUI(QMainWindow):
     def build_widgets(self):
         main_layout = QVBoxLayout()
 
-        title = QLabel("Foss505")
+        title = QLabel("foss505")
         title.setFont(QFont("KaushanScript", 40))
         title.setAlignment(Qt.AlignCenter)
+        title.setStyleSheet("color: #E04D01;")
         main_layout.addWidget(title)
 
         ### Generate Loop channel areas.
