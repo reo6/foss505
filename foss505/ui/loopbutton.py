@@ -44,7 +44,7 @@ class LoopButton(QLabel):
         print(f"Log: Mode set to {mode}")
 
     def update_pixmap(self):
-        if self.loop.take == []:
+        if self.loop.take == [] and self.loop.mode == LoopMode.PLAY:
             self.setPixmap(get_pixmap(LoopPixmapTypes.INACTIVE))
             return
 
