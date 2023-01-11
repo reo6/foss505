@@ -6,7 +6,7 @@ from typing import Any
 from enum import Enum
 
 
-DEFAULT_IMG_SIZE = (256, 256)
+DEFAULT_IMG_SIZE = (150, 150)
 
 LoopPixmapTypes = Enum("LoopPixmapTypes", ["INACTIVE", "PLAY", "OVERDUB", "RECORD"])
 
