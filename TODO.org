@@ -6,7 +6,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
   - [ ] Toggle metronome
 - [ ] Record beginning and ending quantization
 
-* TODO Fundamentals [1/5]
+* TODO Fundamentals [1/6]
 - [X] Basic implementation of multiple loopers [3/3]
   - [X] Implement Loop
   - [X] Implement Station
@@ -15,8 +15,9 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [ ] Advanced logging hooks
 - [ ] Enabling/Disabling a loop.
 - [ ] Use one input source for the entire looper instead of using different ones for each other.
+- [ ] Solo/Mute functionality.
 
-* TODO UI [3/7]
+* TODO UI [5/9]
 - [X] Creating a UI
 - [X] Adding loop buttons
   - [X] Dynamic colors for different modes
@@ -25,6 +26,8 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [ ] Reset loop button
 - [ ] UI Part of enabling/disabling a loop.
 - [ ] Refactor dirty LoopButton structure
+- [X] Mute button
+- [X] Solo button
 
 * TODO Bugs [0/2]
 - [ ] Record is over-amplified when client started without resetting the Loop.
