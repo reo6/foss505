@@ -6,7 +6,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
   - [ ] Toggle metronome
 - [ ] Record beginning and ending quantization
 
-* TODO Fundamentals [1/4]
+* TODO Fundamentals [1/5]
 - [X] Basic implementation of multiple loopers [3/3]
   - [X] Implement Loop
   - [X] Implement Station
