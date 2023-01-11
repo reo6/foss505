@@ -1,7 +1,8 @@
-from PySide6.QtWidgets import QSlider, QVBoxLayout, QWidget, QLabel
+from PySide6.QtWidgets import QSlider, QHBoxLayout, QVBoxLayout, QWidget, QLabel, QPushButton
 from foss505.loop import Loop
 from PySide6.QtCore import Qt
 import numpy as np
+from typing import Callable
 
 def coef(gain):
     return 10**(gain/20)
@@ -10,6 +11,45 @@ def gain(coef):
     return 20 * np.log10(coef)
 
 DB_LIMITS = (-30, 5)
+
+
+class ToggleButton(QPushButton):
+    """
+    Toggle button base class.
+    """
+    def __init__(self):
+        super().__init__()
+
+        self.setCheckable(True)
+        self.setStyleSheet("""
+        QPushButton {
+            background-color: #2A2550;
+            color: #E04D01;
+            font-weight: bold;
+        }
+
+        QPushButton:checked {
+            background-color: #E04D01;
+            color: #251D3A;
+        }
+        """)
+
+
+class MuteButton(ToggleButton):
+    def __init__(self, toggle_mute: Callable):
+        super().__init__()
+
+        self.toogle_mute = toggle_mute
+        self.setText("M")
+
+
+class SoloButton(ToggleButton):
+     def __init__(self, toggle_solo: Callable):
+        super().__init__()
+
+        self.toogle_solo = toggle_solo
+        self.setText("S")
+
 
 class LoopVolumeBar(QWidget):
     def __init__(self, loop: Loop, slider_limits: tuple[int, int]= DB_LIMITS): # TODO: Revise this limit
@@ -53,7 +93,17 @@ class LoopVolumeBar(QWidget):
         self.updateLabel()
         main_layout.addWidget(self.volume_label)
 
+        buttons_layout = QHBoxLayout()
+        self.mute_button = MuteButton(self.toggleMute)
+        self.solo_button = SoloButton(self.toggleSolo)
+        buttons_layout.addWidget(self.mute_button)
+        buttons_layout.addWidget(self.solo_button)
+
+        main_layout.addLayout(buttons_layout)
         self.setLayout(main_layout)
+
+    def toggleMute(self): pass # TODO
+    def toggleSolo(self): pass # TODO
 
     def sliderChanged(self, value):
         if self.muted:
