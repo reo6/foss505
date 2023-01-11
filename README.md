@@ -1,1 +1,1 @@
-![Readme bannedr](https://github.com/ramazanemreosmanoglu/foss505/raw/master/readme_assets/banner.gif)
+![Readme banner](https://github.com/ramazanemreosmanoglu/foss505/blob/master/readme_assets/banner.gif)
