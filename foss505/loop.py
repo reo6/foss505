@@ -25,6 +25,7 @@ class Loop:
         self.bufsize = bufsize
         self.id = id
         self.is_active = True
+        self.gain = 1.0
 
         self.reset_loop() # See Todo.org/Bugs
         self.reset_loop()
@@ -53,7 +54,16 @@ class Loop:
         pair = self.take[self.index]
         self.index += 1
 
-        return pair
+        return self.apply_gain(pair)
+
+    def apply_gain(self, pair: BlockPair):
+        """
+        Apply volume parameter to the given block pair.
+        """
+        return tuple(map(
+            lambda block: np.multiply(block, self.gain), # FIXME
+            pair
+        ))
 
     def write_blocks(self, pair: BlockPair) -> BlockPair:
         """
@@ -63,13 +73,13 @@ class Loop:
         """
         if self.mode == LoopMode.RECORD:
             self.take.append(pair)
-            return pair
+            return self.apply_gain(pair)
         elif self.mode == LoopMode.OVERDUB:
             take_pair = self.take[self.index]
             new_pair = (take_pair[0] + pair[0], take_pair[1] + pair[1])
             self.take[self.index] = new_pair
             self.index += 1
-            return new_pair
+            return self.apply_gain(new_pair)
         elif self.mode == LoopMode.PLAY:
             raise Exception("Cannot write blocks while in play mode.")
 
