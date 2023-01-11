@@ -78,3 +78,18 @@ class Loop:
         self.mode = LoopMode.PLAY
         self.take = []
         self.index = 0
+
+    def toggle(self):
+        """
+        Toggle the looper.
+        """
+        if self.mode == LoopMode.RECORD or self.mode == LoopMode.OVERDUB:
+            self.mode = LoopMode.PLAY
+            return
+
+        if self.take == []:
+            # It's the first toggle.
+            self.mode = LoopMode.RECORD
+            self._is_first_toggle = False
+        else:
+            self.mode = LoopMode.OVERDUB
