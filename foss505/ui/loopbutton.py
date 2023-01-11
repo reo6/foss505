@@ -11,14 +11,14 @@ DEFAULT_IMG_SIZE = (150, 150)
 LoopPixmapTypes = Enum("LoopPixmapTypes", ["INACTIVE", "PLAY", "OVERDUB", "RECORD"])
 
 def get_pixmap(type: LoopPixmapTypes): # FIXME: Recreate this structure.
-    if type == LoopPixmapTypes.INACTIVE:
-        return QPixmap("foss505/ui/assets/images/inactive.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio)
-    if type == LoopPixmapTypes.PLAY:
-        return QPixmap("foss505/ui/assets/images/play.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio)
-    if type == LoopPixmapTypes.OVERDUB:
-        return QPixmap("foss505/ui/assets/images/overdub.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio)
-    if type == LoopPixmapTypes.RECORD:
-        return QPixmap("foss505/ui/assets/images/record.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio)
+    mapping = {
+        LoopPixmapTypes.PLAY: QPixmap("foss505/ui/assets/images/play.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.RECORD: QPixmap("foss505/ui/assets/images/recording.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.OVERDUB: QPixmap("foss505/ui/assets/images/overdub.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.INACTIVE: QPixmap("foss505/ui/assets/images/inactive.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+    }
+
+    return mapping[type]
 
 def get_pixmap_from_loopmode(mode: LoopMode):
     mapping = {
@@ -38,22 +38,12 @@ class LoopButton(QLabel):
         self.setAlignment(Qt.AlignCenter)
         self.mousePressEvent = self.on_hit
 
-    def set_mode(self, mode: LoopMode):
-        self.loop.mode = mode
-        self.update_pixmap()
-        print(f"Log: Mode set to {mode}")
-
     def update_pixmap(self):
-        if self.loop.take == [] and self.loop.mode == LoopMode.PLAY:
+        if self.loop.take == [] and self.loop.mode != LoopMode.RECORD:
             self.setPixmap(get_pixmap(LoopPixmapTypes.INACTIVE))
-            return
-
-        self.setPixmap(get_pixmap_from_loopmode(self.loop.mode))
+        else:
+            self.setPixmap(get_pixmap_from_loopmode(self.loop.mode))
 
     def on_hit(self, event: Any): # FIXME
-        if self.loop.take == [] and self.loop.mode == LoopMode.PLAY:
-            self.set_mode(LoopMode.RECORD)
-        elif self.loop.mode == LoopMode.PLAY:
-            self.set_mode(LoopMode.OVERDUB)
-        elif self.loop.mode == LoopMode.RECORD or self.loop.mode == LoopMode.OVERDUB:
-            self.set_mode(LoopMode.PLAY)
+        self.loop.toggle()
+        self.update_pixmap()
