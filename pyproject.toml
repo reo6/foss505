@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["ramazanemreosmanoglu <ramazanemre@protonmail.com>"]
 readme = "README.md"
+exclude = ["readme_assets"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
