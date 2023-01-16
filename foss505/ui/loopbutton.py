@@ -4,6 +4,7 @@ from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from typing import Any
 from enum import Enum
+from foss505.ui.get_asset import asset
 
 
 DEFAULT_IMG_SIZE = (150, 150)
@@ -12,10 +13,11 @@ LoopPixmapTypes = Enum("LoopPixmapTypes", ["INACTIVE", "PLAY", "OVERDUB", "RECOR
 
 def get_pixmap(type: LoopPixmapTypes): # FIXME: Recreate this structure.
     mapping = {
-        LoopPixmapTypes.PLAY: QPixmap("foss505/ui/assets/images/play.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
-        LoopPixmapTypes.RECORD: QPixmap("foss505/ui/assets/images/recording.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
-        LoopPixmapTypes.OVERDUB: QPixmap("foss505/ui/assets/images/overdub.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
-        LoopPixmapTypes.INACTIVE: QPixmap("foss505/ui/assets/images/inactive.png").scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.PLAY: QPixmap(asset("images/play.png")).scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.RECORD: QPixmap(asset("images/recording.png")).scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.OVERDUB: QPixmap(asset("images/overdub.png")).scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.INACTIVE: QPixmap(asset("images/inactive.png")).scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
+        LoopPixmapTypes.MUTED: QPixmap(asset("images/muted.png")).scaled(*DEFAULT_IMG_SIZE, Qt.KeepAspectRatio),
     }
 
     return mapping[type]
