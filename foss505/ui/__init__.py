@@ -11,7 +11,7 @@ from PySide6.QtCore import Qt
 import sys
 from foss505.station import Station, LOOP_CHANNEL_SIZE
 from foss505.ui.loopchannel import LoopChannel
-
+from foss505.ui.get_asset import asset
 
 
 class LooperUI(QMainWindow):
@@ -20,10 +20,10 @@ class LooperUI(QMainWindow):
         self.station = station
 
         self.setWindowTitle("Foss505")
-        self.setWindowIcon(QIcon('foss505/ui/assets/images/logo.png'))
+        self.setWindowIcon(QIcon(asset("images/logo.png")))
 
         # Load the font.
-        QFontDatabase.addApplicationFont("foss505/ui/assets/fonts/KaushanScript-Regular.ttf")
+        QFontDatabase.addApplicationFont(asset("fonts/KaushanScript-Regular.ttf"))
 
         # Build the widgets.
         self.build_widgets()
