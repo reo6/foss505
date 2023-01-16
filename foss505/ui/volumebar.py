@@ -43,12 +43,19 @@ class MuteButton(ToggleButton):
         self.setText("M")
 
 
-class SoloButton(ToggleButton):
-     def __init__(self, toggle_solo: Callable):
+class ResetButton(QPushButton):
+     def __init__(self, reset_take: Callable):
         super().__init__()
 
-        self.toogle_solo = toggle_solo
-        self.setText("S")
+        self.clicked.connect(reset_take)
+        self.setText("D")
+        self.setStyleSheet("""
+        QPushButton {
+            background-color: #2A2550;
+            color: #E04D01;
+            font-weight: bold;
+        }
+        """)
 
 
 class LoopVolumeBar(QWidget):
@@ -95,15 +102,18 @@ class LoopVolumeBar(QWidget):
 
         buttons_layout = QHBoxLayout()
         self.mute_button = MuteButton(self.toggleMute)
-        self.solo_button = SoloButton(self.toggleSolo)
+        self.reset_button = ResetButton(self.resetTake)
         buttons_layout.addWidget(self.mute_button)
-        buttons_layout.addWidget(self.solo_button)
+        buttons_layout.addWidget(self.reset_button)
 
         main_layout.addLayout(buttons_layout)
         self.setLayout(main_layout)
 
-    def toggleMute(self): pass # TODO
-    def toggleSolo(self): pass # TODO
+    def toggleMute(self):
+        self.loop.muted = not self.loop.muted
+
+    def resetTake(self):
+        self.loop.reset_loop()
 
     def sliderChanged(self, value):
         if self.muted:
