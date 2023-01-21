@@ -2,7 +2,10 @@ from foss505.loop import Loop, LoopMode, Block
 import numpy as np
 import copy
 
+
 LOOP_CHANNEL_SIZE = 5
+get_empty_block = lambda bufsize: np.zeros(bufsize, dtype=np.float32)
+get_empty_pair  = lambda bufsize: (get_empty_block(bufsize), get_empty_block(bufsize))
 
 class Station:
     """
@@ -20,14 +23,31 @@ class Station:
         output_r = copy.deepcopy(_empty_block)
 
         for input_l, input_r, loop in zip(buffers_l, buffers_r, self.loop_channels):
-            if loop.mode == LoopMode.PLAY:
+            if loop.mode.value == LoopMode.PLAY:
                 """
                 Play loop takes and incoming audio together.
                 """
                 take_l, take_r = loop.next_blocks()
                 output_l += take_l + input_l
                 output_r += take_r + input_r
-            elif loop.mode == LoopMode.RECORD:
+
+            elif loop.mode.value == LoopMode.EMPTY:
+                """
+                There's nothing recorded. Play incoming audio.
+                """
+                output_l += input_l
+                output_r += input_r
+
+            elif loop.mode.value == LoopMode.MUTED:
+                """
+                Recorded take (either it exists or not) is muted. Don't play anything.
+                Get the next audio blocks to keep the index though.
+                """
+                _ = loop.next_blocks()
+                output_l += get_empty_block(self.bufsize)
+                output_r += get_empty_block(self.bufsize)
+
+            elif loop.mode.value == LoopMode.RECORD:
                 """
                 There should be nothing in the take right now. So play
                 incoming audio and also record it.
@@ -35,7 +55,8 @@ class Station:
                 loop.write_blocks((input_l, input_r))
                 output_l += input_l
                 output_r += input_r
-            elif loop.mode == LoopMode.OVERDUB:
+
+            elif loop.mode.value == LoopMode.OVERDUB:
                 """
                 Overdubbing. Write incoming audio to the loop take,
                 and then play the take that is already mixed with the input.
@@ -43,5 +64,8 @@ class Station:
                 take_l, take_r = loop.write_blocks((input_l, input_r))
                 output_l += take_l
                 output_r += take_r
+
+            else:
+                print("wtf")
 
         return (output_l, output_r)

@@ -40,6 +40,7 @@ class MuteButton(ToggleButton):
         super().__init__()
 
         self.toogle_mute = toggle_mute
+        self.clicked.connect(toggle_mute)
         self.setText("M")
 
 
@@ -63,7 +64,6 @@ class LoopVolumeBar(QWidget):
         super().__init__()
 
         self.loop = loop
-        self.muted = False
         self.slider_limits = slider_limits
 
         self.build_widgets()
@@ -110,17 +110,13 @@ class LoopVolumeBar(QWidget):
         self.setLayout(main_layout)
 
     def toggleMute(self):
-        self.loop.muted = not self.loop.muted
+        self.loop.toggle_mute()
 
     def resetTake(self):
         self.loop.reset_loop()
 
     def sliderChanged(self, value):
-        if self.muted:
-            self.loop.gain = 0
-        else:
-            self.loop.gain = coef(value)
-
+        self.loop.gain = coef(value)
         self.updateLabel()
 
     def updateLabel(self):

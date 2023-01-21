@@ -4,12 +4,13 @@ Representing a single "Loop".
 import numpy as np
 from enum import Enum
 from typing import Any
+from foss505.observable import Observable
 
-get_empty_block = lambda bufsize: np.zeros(bufsize, dtype=np.float32)
+
 Block = Any # TODO: np.array[np.float32]
 BlockPair = tuple[Block, Block]
 Take = list[BlockPair]
-LoopMode = Enum("LoopMode", ["PLAY", "RECORD", "OVERDUB"])
+LoopMode = Enum("LoopMode", ["PLAY", "RECORD", "OVERDUB", "MUTED", "EMPTY"])
 
 
 class Loop:
@@ -19,7 +20,7 @@ class Loop:
                  initial_take: Take=[],
                  initial_mode: LoopMode=LoopMode.EMPTY):
         self.take = initial_take
-        self.mode = initial_mode
+        self.mode = Observable(initial_mode)
         self.__index = 0
         self.bufsize = bufsize
         self.id = id
@@ -71,23 +72,23 @@ class Loop:
         Extends the take if in the recording mode, doesn't extend if
         overdubbing.
         """
-        if self.mode == LoopMode.RECORD:
+        if self.mode.value == LoopMode.RECORD:
             self.take.append(pair)
             return self.apply_gain(pair)
-        elif self.mode == LoopMode.OVERDUB:
+        elif self.mode.value == LoopMode.OVERDUB:
             take_pair = self.take[self.index]
             new_pair = (take_pair[0] + pair[0], take_pair[1] + pair[1])
             self.take[self.index] = new_pair
             self.index += 1
             return self.apply_gain(new_pair)
-        elif self.mode == LoopMode.PLAY:
+        elif self.mode.value == LoopMode.PLAY:
             raise Exception("Cannot write blocks while in play mode.")
 
     def get_name(self):
         return f"Loop Channel #{self.id}"
 
     def reset_loop(self):
-        self.mode = LoopMode.PLAY
+        self.mode.value = LoopMode.EMPTY
         self.take = []
         self.index = 0
 
@@ -95,13 +96,22 @@ class Loop:
         """
         Toggle the looper.
         """
-        if self.mode == LoopMode.RECORD or self.mode == LoopMode.OVERDUB:
-            self.mode = LoopMode.PLAY
-            return
+        if self.mode.value == LoopMode.RECORD or self.mode.value == LoopMode.OVERDUB:
+            self.mode.value = LoopMode.PLAY
 
-        if self.take == []:
+        elif self.mode.value == LoopMode.EMPTY:
             # It's the first toggle.
-            self.mode = LoopMode.RECORD
-            self._is_first_toggle = False
+            self.mode.value = LoopMode.RECORD
+        elif self.mode.value == LoopMode.PLAY:
+            self.mode.value = LoopMode.OVERDUB
+        elif self.mode.value == LoopMode.MUTED:
+            self.mode.value = LoopMode.PLAY
+
+    def toggle_mute(self):
+        if self.mode.value != LoopMode.MUTED and self.mode.value != LoopMode.PLAY:
+            raise Exception("Cannot switch to muted mode when it's not in the play mode.")
+
+        if self.mode.value == LoopMode.MUTED:
+            self.mode.value = LoopMode.PLAY
         else:
-            self.mode = LoopMode.OVERDUB
+            self.mode.value = LoopMode.MUTED
