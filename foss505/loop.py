@@ -2,7 +2,6 @@
 Representing a single "Loop".
 """
 import numpy as np
-import numpy.typing as npt
 from enum import Enum
 from typing import Any
 
