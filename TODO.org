@@ -6,30 +6,39 @@ This is an org file and is not guaranteed to look as expected on the Github page
   - [ ] Toggle metronome
 - [ ] Record beginning and ending quantization
 
-* TODO Fundamentals [1/7]
+* TODO Base API [2/5]
 - [X] Basic implementation of multiple loopers [3/3]
   - [X] Implement Loop
   - [X] Implement Station
   - [X] Implement Jack wrappers.
-- [ ] Recording and saving to a file
+- [ ] Recording the performance and saving as an audio file.
+- [ ] Project save files.
 - [ ] Advanced logging hooks
-- [ ] Mute/Reset functionality.
-- [ ] Keyboard controls.
+  - [ ] Seperate stdout-stderr and save important things on the disk.
+- [X] Mute/Reset functionality.
+- [ ] Make loop.mode read-only for the API.
 
-* TODO UI [4/8]
+* TODO Keyboard Controls API [0/1]
+- [ ] Base of a configurable and extensible keyboard API.
+
+* TODO UI [7/8]
 - [X] Creating a UI
 - [X] Adding loop buttons
   - [X] Dynamic colors for different modes
 - [ ] Loop progress bars
 - [X] Volume Sliders
-- [ ] Reset loop button
-- [ ] UI Part of enabling/disabling a loop.
-- [ ] Refactor dirty LoopButton structure
+- [X] Reset loop button
+- [X] UI Part of enabling/disabling a loop.
 - [X] Refactor dirty LoopButton structure
 - [X] Mute button
 
+* TODO Project (Packagement/Releases) [0/1]
+- [ ] .desktop file integration.
+
 * TODO Bugs [0/2]
-- [ ] Record is over-amplified when client started without resetting the Loop.
+- [ ] Record is over-amplified when client started without resetting the Loop. (Untested on the latest version)
 - [ ] The block size of the input blocks are 256 for no reason. Changing block size to 256 solves the problem temporarily.
 
-* IDEA Create process function on Loop instances instead of the station. (?)
+* IDEA Ideas and thoughts
+*** [?] Create process function on Loop instances instead of the station.
+*** [?] Use YAML for keyboard configuration instead of JSON.
