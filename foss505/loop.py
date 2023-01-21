@@ -17,7 +17,7 @@ class Loop:
                  id: int,
                  bufsize: int,
                  initial_take: Take=[],
-                 initial_mode: LoopMode=LoopMode.PLAY):
+                 initial_mode: LoopMode=LoopMode.EMPTY):
         self.take = initial_take
         self.mode = initial_mode
         self.__index = 0
@@ -48,7 +48,8 @@ class Loop:
 
     def next_blocks(self) -> BlockPair:
         if len(self.take) == 0:
-            return (get_empty_block(self.bufsize), get_empty_block(self.bufsize))
+            assert self.mode.value.value == LoopMode.EMPTY
+            raise Exception("Take is empty.")
 
         pair = self.take[self.index]
         self.index += 1
