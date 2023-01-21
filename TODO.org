@@ -25,6 +25,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [ ] Reset loop button
 - [ ] UI Part of enabling/disabling a loop.
 - [ ] Refactor dirty LoopButton structure
+- [X] Refactor dirty LoopButton structure
 - [X] Mute button
 
 * TODO Bugs [0/2]
