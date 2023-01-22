@@ -21,7 +21,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
 * TODO Keyboard Controls API [0/1]
 - [ ] Base of a configurable and extensible keyboard API.
 
-* TODO UI [7/8]
+* TODO UI [7/9]
 - [X] Creating a UI
 - [X] Adding loop buttons
   - [X] Dynamic colors for different modes
@@ -31,6 +31,7 @@ This is an org file and is not guaranteed to look as expected on the Github page
 - [X] UI Part of enabling/disabling a loop.
 - [X] Refactor dirty LoopButton structure
 - [X] Mute button
+- [ ] Instrument chooser button that will list virtual audio outputs running and will make jack connections.
 
 * TODO Project (Packagement/Releases) [0/1]
 - [ ] .desktop file integration.
