@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "foss505"
-version = "0.1.0"
+version = "0.1.0a0"
 description = "The ultimate loop station."
 license = "GPL-3.0-only"
 authors = ["ramazanemreosmanoglu <ramazanemre@protonmail.com>"]
