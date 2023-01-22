@@ -5,6 +5,7 @@ import numpy as np
 from enum import Enum
 from typing import Any
 from foss505.observable import Observable
+from foss505.exceptions import MuteError, ToggleError, EmptyTakeError, BlockWriteError
 
 
 Block = Any # TODO: np.array[np.float32]
@@ -49,8 +50,8 @@ class Loop:
 
     def next_blocks(self) -> BlockPair:
         if len(self.take) == 0:
-            assert self.mode.value.value == LoopMode.EMPTY
-            raise Exception("Take is empty.")
+            assert self.mode.value == LoopMode.EMPTY
+            raise EmptyTakeError("Take is empty.")
 
         pair = self.take[self.index]
         self.index += 1
@@ -81,8 +82,8 @@ class Loop:
             self.take[self.index] = new_pair
             self.index += 1
             return self.apply_gain(new_pair)
-        elif self.mode.value == LoopMode.PLAY:
-            raise Exception("Cannot write blocks while in play mode.")
+        else:
+            raise BlockWriteError("Cannot write blocks while not in record/overdub mode.")
 
     def get_name(self):
         return f"Loop Channel #{self.id}"
@@ -96,7 +97,10 @@ class Loop:
         """
         Toggle the looper.
         """
-        if self.mode.value == LoopMode.RECORD or self.mode.value == LoopMode.OVERDUB:
+        if self.mode.value == LoopMode.MUTED:
+            raise ToggleError("Cannot toggle loop when in muted mode. Toggle the mute first.")
+
+        if self.mode.value in (LoopMode.RECORD, LoopMode.OVERDUB):
             self.mode.value = LoopMode.PLAY
 
         elif self.mode.value == LoopMode.EMPTY:
@@ -104,14 +108,18 @@ class Loop:
             self.mode.value = LoopMode.RECORD
         elif self.mode.value == LoopMode.PLAY:
             self.mode.value = LoopMode.OVERDUB
-        elif self.mode.value == LoopMode.MUTED:
-            self.mode.value = LoopMode.PLAY
 
     def toggle_mute(self):
-        if self.mode.value != LoopMode.MUTED and self.mode.value != LoopMode.PLAY:
-            raise Exception("Cannot switch to muted mode when it's not in the play mode.")
+        """
+        Toggles the mute state of the looper.
+        """
+        if not self.mode.value in (LoopMode.MUTED, LoopMode.PLAY):
+            raise MuteError("Cannot switch to muted mode when it's not in the play mode. (Meaning something should be recorded.)")
 
         if self.mode.value == LoopMode.MUTED:
-            self.mode.value = LoopMode.PLAY
+            if len(self.take) == 0:
+                self.mode.value = LoopMode.EMPTY
+            else:
+                self.mode.value = LoopMode.PLAY
         else:
             self.mode.value = LoopMode.MUTED
