@@ -15,6 +15,9 @@ LoopMode = Enum("LoopMode", ["PLAY", "RECORD", "OVERDUB", "MUTED", "EMPTY"])
 
 
 class Loop:
+    """
+    Represents a single loop channel.
+    """
     def __init__(self,
                  id: int,
                  bufsize: int,
@@ -49,6 +52,10 @@ class Loop:
             self.__index = new_value
 
     def next_blocks(self) -> BlockPair:
+        """
+        Returns the next recorded block pair from the loop take.
+        Raises EmptyTakeError if the take is empty.
+        """
         if len(self.take) == 0:
             assert self.mode.value == LoopMode.EMPTY
             raise EmptyTakeError("Take is empty.")
@@ -86,9 +93,16 @@ class Loop:
             raise BlockWriteError("Cannot write blocks while not in record/overdub mode.")
 
     def get_name(self):
+        """
+        Returns the name of the loop channel.
+        """
         return f"Loop Channel #{self.id}"
 
     def reset_loop(self):
+        """
+        Reset the loop.
+        Clear the take and switch to empty mode.
+        """
         self.mode.value = LoopMode.EMPTY
         self.take = []
         self.index = 0
