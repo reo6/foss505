@@ -52,3 +52,7 @@ Running the program:
 # Assuming that you have $HOME/.local/bin on your PATH.
 foss505
 ```
+
+# But wait, what is this?
+
+This is an audio looper, based on JACK. You can use UI or your computer keyboard to control the looper, and create live performances.
