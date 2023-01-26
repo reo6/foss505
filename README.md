@@ -1,6 +1,7 @@
-![](https://github.com/ramazanemreosmanoglu/foss505/blob/main/readme_assets/banner-4s-round.gif)
-
 <div align="center">
+
+  # foss505
+  
   <b>Disclaimer:</b> This project is currently at the early development. Expect <a href="https://github.com/ramazanemreosmanoglu/foss505/blob/main/TODO.org#bugs-02">bugs</a>.
 </div>
 
