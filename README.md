@@ -56,3 +56,8 @@ foss505
 # But wait, what is this?
 
 This is an audio looper, based on JACK. You can use UI or your computer keyboard to control the looper, and create live performances.
+
+# Screenshots
+
+![0.1.0a0](https://github.com/ramazanemreosmanoglu/foss505/blob/main/readme_assets/ss.png "0.1.0a0")
+
