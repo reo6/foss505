@@ -1,6 +1,5 @@
-# foss505
-
 <div align="center">
+  <h1>foss505</h1>
   <b>Disclaimer:</b> This project is currently at the early development. Expect <a href="https://github.com/ramazanemreosmanoglu/foss505/blob/main/TODO.org#bugs-02">bugs</a>.
 </div>
 
