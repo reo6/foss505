@@ -1,7 +1,7 @@
 <div align="center">
   <h1>foss505</h1>
-  <b>Disclaimer:</b> This project is currently at the early development. Expect <a href="https://github.com/ramazanemreosmanoglu/foss505/blob/main/TODO.org#bugs-02">bugs</a>.
-  <b>Another One: Probably abandoned. Even if I decide to continue, I'd do it in Zig or another low level language.</b>
+  <b>Disclaimer:</b> This project is currently at the early development. Expect <a href="https://github.com/ramazanemreosmanoglu/foss505/blob/main/TODO.org#bugs-02">bugs</a>. <br><br>
+  <b>Another One:</b> Probably abandoned. Even if I decide to continue, I'd do it in Zig or another low level language.
 </div>
 
 # Installation
