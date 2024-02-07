@@ -4,6 +4,8 @@
   <b>Disclaimer:</b> This project is currently at the early development. Expect <a href="https://github.com/ramazanemreosmanoglu/foss505/blob/main/TODO.org#bugs-02">bugs</a>.
 </div>
 
+<b>Note</b>: I had an accident with my GitHub account and the commit history is reset. I've had to upload the PYPI version of the project.
+
 # Installation
 
 I didn't test for operating systems other than linux for now. A running Jack server and -<i>probably</i>- a patchbay (qpwgraph, qjackctl etc.) required.
@@ -27,7 +29,7 @@ pip install foss505
 Make sure you have <a href="">poetry</a> installed on your system.
 
 ```
-git clone https://github.com/ramazanemreosmanoglu/foss505
+git clone https://github.com/reo6/foss505
 cd foss505/
 poetry install
 ```
